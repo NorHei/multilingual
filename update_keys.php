@@ -1,20 +1,7 @@
 <?php
-/**
- *
- * @category        modules
- * @package         multilingual
- * @author          WebsiteBaker Project
- * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
- * @link			http://www.websitebaker2.org/
- * @license         http://www.gnu.org/licenses/gpl.html
- * @platform        WebsiteBaker 2.8.1
- * @requirements    PHP 5.1.0 and higher
- * @version         $Id:  $
- * @filesource		$HeadURL:  $
- * @lastmodified    $Date:  $
- *
- */
+//no direct file access
+if(count(get_included_files()) ==1){$z="HTTP/1.0 404 Not Found";header($z);die($z);}
+
 
 // Get page id
 if(isset($_GET['page_id']))

@@ -1,32 +1,7 @@
 <?php
-/**
- * Code snippet: Language Switcher
- *
- * This code snippets displays language flags which can be used to
- * switch the current displayed page to another language.
- *
- * Pls read following instruction to get language switcher working:
- *
- * it is required to activate the language page settings
- * by adding a page, set the page setting to the correct language
- *
- *
- *
- *
- * This file contains the language switcher function.
- *
- * LICENSE: GNU General Public License 3.0
- *
- * @author		Dietmar Wöllbrink
- * @copyright	Dietmar Wöllbrink (c) 2009 - 2011
- * @license		http://www.gnu.org/licenses/gpl.html
- * @version		0.1.0
- * @platform	Website Baker 2.8.x
- *
-*/
+//no direct file access
+if(count(get_included_files()) ==1){$z="HTTP/1.0 404 Not Found";header($z);die($z);}
 
-// prevent this file from being accessed directly
-if (!defined('WB_PATH')) { die( header('Location: ../../index.php')); }
 
 
 if(!function_exists('language_menu'))
