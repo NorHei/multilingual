@@ -1,0 +1,81 @@
+Mod_Multilingual 
+-----------------
+
+Grundsätzlich wird bei WBCE  für mehrsprachige Seiten kein Mod_Multilingual benötigt. Einfach mehrsprachen Support in den Einstellungen aktivieren und folgende Verzeichnissstruktur anlegen.
+
+	EN
+	|-Home
+	|-Blog
+	|-About
+	DE
+	|-Start
+	|-Blog
+	|-Über Mich
+	FR
+	.
+	.
+	.
+
+
+Multilingual dient zwei Zwecken:
+
+- Es erstellt ein Menu zum umstellen der Sprache.
+- Es verknüpft die jeweiligen Seiten der verschiedenen Sprachen miteinander. Also wenn man im Deutschen "Impressum" auf Englisch klickt landet man direkt im englischen "Imprint" und nicht einfach auf der Startseite.
+
+Wenn Sie etwas faul sind können sie auch einfach den Sprachumschalter nutzen ohne das sie Verknüpfungen zwischen den Seiten definiert haben.
+
+Wenn Sie das Modul installiert haben und in den Einstellungen Mehrsprachigkeit aktiviert haben, dann ersheint in den Seiteneinstellungen ein zusätzliche Feld in dem Sie die verknüpfungen zwischen den Seiten einstellen können.
+
+Um das Sprachmenu anzuzeigen brauchen Sie folgenden Code im Template:
+
+Old version:
+	<div class="langmenu">
+	   <?php  if(function_exists('language_menu')) { language_menu(); }  ?>
+	</div>
+
+
+Optionen sind png,gif,jpg,txt. 
+
+jpg - funktioniert, bilder sind allerdings keine vorhanden.
+txt - gibt einfach die länder als Text aus.
+png - benutzt die etwas größeren .png Flaggen
+gif - benutzt die kleineren .gif Flaggen
+
+Default ist txt!
+
+Eine Entsprecend erzeugtes Menu sieht dann im HTML etwa so aus:
+
+
+	<div id="langmenu">
+		<a class="current" href ="http://mydomain.de/pages/de/startseite.php" title="Germany" >
+			<span>
+				<img src="http://mydomain.de/modules/mod_multilingual/flags/de.png" alt="Germany" title="Germany" />
+			</span>
+		</a>
+		<a  class="default" href ="http://mydomain.de/pages/en.php" title="English" >
+			<span>
+				<img src="http://mydomain.de/modules/mod_multilingual/flags/en.png" alt="English" title="English" />
+			</span>
+		</a>
+		<a  class="default" href ="http://mydomain.de/pages/fr.php" title="French" >
+			<span>
+				<img src="http://mydomain.de/modules/mod_multilingual/flags/fr.png" alt="French" title="French" />
+			</span>
+		</a>
+	</div>
+
+Allerdings ohne die hübschen Einrückungen.
+
+
+Eine Annnmerkung für interessierte:
+
+Damit der Menüpunkt im Backend angezeigt wird ,
+müssen folgende Bedingungen erfüllt sein:
+
+1. Das Datenbankfeld "page_code" ist vorhanden.(legt der Modul Installer an)
+2. Seitensprache ist eingeschaltet
+3. Die Datei update_keys.php im Ordner /modules/mod_multilingual/ ist vorhanden.
+   (Also das Modul ist installiert.)
+
+		
+
