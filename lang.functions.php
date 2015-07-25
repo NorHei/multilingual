@@ -8,7 +8,7 @@ include_once(WB_PATH.'/framework/module.functions.php');
 require_once(WB_PATH.'/framework/class.frontend.php');
 require_once(WB_PATH.'/framework/class.admin.php');
 
-$default_language = 'en';
+$default_language = DEFAULT_LANGUAGE;
 // later get from addons or directory
 $allowed_langs = array ( 'bg','ca','cs','da','de','en','es','et','fi','fr','hr',
                          'hu','it','lv','nl','no','pl','pt','ru','se','sk','tr' );
