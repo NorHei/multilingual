@@ -111,7 +111,7 @@ function get_languages($langKey) {
     return $return_value;
 }
 
-function set_language_icon ($pageId = 0, $ext='gif' )
+function set_language_icon ($pageId = 0, $ext='txt' )
 {
     $return_value = array();
 	$mod_path = dirname(__FILE__);
@@ -128,10 +128,16 @@ function set_language_icon ($pageId = 0, $ext='gif' )
 		$page_title = get_languages($langKey);
         $langUrl = get_page_url( $value);
 		$class = strtoupper($langKey) == LANGUAGE ? 'class="current"' : ' class="default"';
-        $return_value [ $langKey ] = '<a '.$class.' href ="'. $langUrl .'" title="'.$page_title.'" >'.PHP_EOL;
-        $return_value [ $langKey ] .= '<span>';
-        $return_value [ $langKey ] .= '<img src="'.WB_URL.'/modules/'.$mod_name.'/flags/'.strtolower( $langKey ).'.'.$ext.'" alt="'.$page_title.'" title="'.$page_title.'" />';
-        $return_value [ $langKey ] .= '</span></a>'.PHP_EOL;
+        $return_value [ $langKey ] = "\t\t".'<a '.$class.' href ="'. $langUrl .'" title="'.$page_title.'" >'.PHP_EOL;
+        $return_value [ $langKey ] .= "\t\t\t".'<span>';
+		if ($ext=='TXT'){
+        	$return_value [ $langKey ] .=" $page_title " ;
+		} else if ($ext=='txt'){
+			$return_value [ $langKey ] .=" $langKey " ;
+		} else {
+			$return_value [ $langKey ] .= PHP_EOL."\t\t\t\t".'<img src="'.WB_URL.'/modules/'.$mod_name.'/flags/'.strtolower( $langKey ).'.'.$ext.'" alt="'.$page_title.'" title="'.$page_title.'" />'.PHP_EOL."\t\t\t";
+		}
+        $return_value [ $langKey ] .= '</span>'.PHP_EOL."\t\t".'</a>'.PHP_EOL;
     }
     return $return_value;
 }

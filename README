@@ -30,17 +30,13 @@ the matching page in default language to connect to.
 
 To display the language menu you need to add the following lines to your template:
 
-Old version:
-	<div class="langmenu">
-	   <?php  if(function_exists('language_menu')) { language_menu(); }  ?>
-	</div>
-
-
+	<?php  if(function_exists('language_menu')) { language_menu(); }  ?>
 
 Options are:  png,gif,jpg,txt.
 
-jpg - functional, but there are no images available atm.
-txt - Just writes the language names.
+jpg - functional, !but there are no images available atm.!
+txt - Just writes the language shortcuts. (DE EN FR)
+TXT - Writes language names. (Deutsch English Francaise)
 png - uses the taller .png flags.
 gif - uses the smaller .gif flags
 
@@ -66,7 +62,7 @@ The generated HTML should look like this:
 		</a>
 	</div>
 
-Whithout the nice formating !
+
 
 To see the additional field in backend you need to match the folowing conditions:
 

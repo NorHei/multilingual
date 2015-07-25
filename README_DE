@@ -28,16 +28,13 @@ Wenn Sie das Modul installiert haben und in den Einstellungen Mehrsprachigkeit a
 
 Um das Sprachmenu anzuzeigen brauchen Sie folgenden Code im Template:
 
-Old version:
-	<div class="langmenu">
-	   <?php  if(function_exists('language_menu')) { language_menu(); }  ?>
-	</div>
-
-
+	<?php  if(function_exists('language_menu')) { language_menu(); }  ?>
+	
 Optionen sind png,gif,jpg,txt. 
 
 jpg - funktioniert, bilder sind allerdings keine vorhanden.
-txt - gibt einfach die länder als Text aus.
+txt - gibt einfach die länder als Abkürzung aus. (DE EN FR)
+TXT - gibt die Länder als Text aus (Deutsch English Francaise)
 png - benutzt die etwas größeren .png Flaggen
 gif - benutzt die kleineren .gif Flaggen
 
@@ -64,7 +61,7 @@ Eine Entsprecend erzeugtes Menu sieht dann im HTML etwa so aus:
 		</a>
 	</div>
 
-Allerdings ohne die hübschen Einrückungen.
+
 
 
 Eine Annnmerkung für interessierte:
