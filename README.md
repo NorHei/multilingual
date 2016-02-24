@@ -16,31 +16,39 @@ Basically WBCE does not need Multilingual for creating multilanguage pages. Just
 	.
 	.
 
+Please keep in mind to name the languagepages after the languagecodes used in WB(CE) 
+like DE, EN, PL... Basically its just the filename that is important, but you only can set the filename manually after creating the page. 
+
+The best module used for this pages is the Menulink, As it can redirect directly to its sub starting page. (Leave link empty till you got some sub pages)
+
 Multilingual serves two purposes:
 
 - It generates a language switcher menu.  
 - It is used to connect multilanguage pages whith the same topic. So if you switch from German "Impressum" to English you get the English "Imprint" page not just the English startpage.
 
-If you are lazy you can use this module as a simple language switcher even if pages 
-are not connected to each other. 
-
 If you installed the module AND activated page languages in the option 
 settings of WBCE, there will be an extra field in pagesettings to select 
 the matching page in default language to connect to.
+
+If you are somewhat lazy you can use this module as a simple language switcher even if pages 
+are not connected to each other. 
 
 To display the language menu you need to add the following lines to your template:
 
 	<?php  if(function_exists('language_menu')) { language_menu(); }  ?>
 
-Options are:  png,gif,jpg,txt.
+Possible options are:  png,gif,jpg,txt,TXT.
 
-jpg - functional, !but there are no images available atm.!
+	<?php  if(function_exists('language_menu')) { language_menu('png'); }  ?>
+
+jpg - uses the taller .png flags.
 txt - Just writes the language shortcuts. (DE EN FR)
 TXT - Writes language names. (Deutsch English Francaise)
 png - uses the taller .png flags.
 gif - uses the smaller .gif flags
 
 Default is txt!
+TXT uses the Title of the language pages, this feature is experimental.  
 
 The generated HTML should look like this:
 

@@ -1,7 +1,7 @@
 Mod_Multilingual 
 -----------------
 
-Grundsätzlich wird bei WBCE  für mehrsprachige Seiten kein Mod_Multilingual benötigt. Einfach mehrsprachen Support in den Einstellungen aktivieren und folgende Verzeichnissstruktur anlegen.
+Grundsätzlich wird bei WBCE  für mehrsprachige Seiten kein Mod_Multilingual benötigt. Einfach mehrsprachen Support in den Einstellungen aktivieren und folgende Verzeichnisstruktur anlegen.
 
 	EN
 	|-Home
@@ -15,6 +15,14 @@ Grundsätzlich wird bei WBCE  für mehrsprachige Seiten kein Mod_Multilingual be
 	.
 	.
 	.
+	
+Wobei darauf zu achten ist, das die Verzeichnisse Entsprechend der Ländercodes der jeweiligen Sprachen benannt werden. Eigentlich ist nur der Dateiname wichtig, den kann man aber erst nach erstellen der Seite getrennt bearbeiten also bitte diese Reihenfolge einhalten.  
+
+Am besten nimmt man hierzu das Menülink Modul, damit direkte aufrufe des Verzeichnisses auch direkt auf die Startseite der jeweiligen Sprache weitergeleitet werden. 
+
+Wichtig ist in der Verzeichnisseite sowie in den Unterseiten auch die Seitensprache richtig einzustellen. 
+
+Die Seite die im Menübaum oben steht, ist die Standardsprache und sollte auch Allgemeinen Einstellungen als Standardsprache gewählt sein. 
 
 
 Multilingual dient zwei Zwecken:
@@ -22,25 +30,28 @@ Multilingual dient zwei Zwecken:
 - Es erstellt ein Menu zum umstellen der Sprache.
 - Es verknüpft die jeweiligen Seiten der verschiedenen Sprachen miteinander. Also wenn man im Deutschen "Impressum" auf Englisch klickt landet man direkt im englischen "Imprint" und nicht einfach auf der Startseite.
 
-Wenn Sie etwas faul sind können sie auch einfach den Sprachumschalter nutzen ohne das sie Verknüpfungen zwischen den Seiten definiert haben.
+Wenn Sie das Modul installiert haben und in den Einstellungen Mehrsprachigkeit aktiviert haben, dann erscheint in den Seiteneinstellungen ein zusätzliche Feld in dem Sie die Verknüpfungen zwischen den Seiten einstellen können. Mit dieser Dropdownliste kann dann die jeweilige Seite mit einer Seite der der Standardsprache verknüpft werden. Damit weiß das System dann welche Seiten zusammen gehören.
 
-Wenn Sie das Modul installiert haben und in den Einstellungen Mehrsprachigkeit aktiviert haben, dann ersheint in den Seiteneinstellungen ein zusätzliche Feld in dem Sie die verknüpfungen zwischen den Seiten einstellen können.
+Wenn Sie etwas faul sind können sie auch einfach den Sprachumschalter nutzen ohne das sie Verknüpfungen zwischen den Seiten definiert haben. (Der Schaltet dann natürlich immer auf die Startseite)
 
 Um das Sprachmenu anzuzeigen brauchen Sie folgenden Code im Template:
 
 	<?php  if(function_exists('language_menu')) { language_menu(); }  ?>
 	
-Optionen sind png,gif,jpg,txt. 
-
-jpg - funktioniert, bilder sind allerdings keine vorhanden.
+Mögliche Optionen sind png,gif,jpg,txt,TXT.
+ 
+	<?php  if(function_exists('language_menu')) { language_menu('png'); }  ?>
+	
+jpg - benutzt die etwas größeren .jpg Flaggen.
 txt - gibt einfach die länder als Abkürzung aus. (DE EN FR)
 TXT - gibt die Länder als Text aus (Deutsch English Francaise)
 png - benutzt die etwas größeren .png Flaggen
 gif - benutzt die kleineren .gif Flaggen
 
-Default ist txt!
+Default ist 'txt'!
+TXT nutzt den Titel der Ordnerseiten, dieses Feature ist experimentell. 
 
-Eine Entsprecend erzeugtes Menu sieht dann im HTML etwa so aus:
+Eine entsprechendes erzeugtes Menü sieht dann im HTML etwa so aus:
 
 
 	<div id="langmenu">
