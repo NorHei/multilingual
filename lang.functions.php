@@ -114,29 +114,30 @@ function get_languages($langKey) {
 function set_language_icon ($pageId = 0, $ext='txt' )
 {
     $return_value = array();
-	$mod_path = dirname(__FILE__);
-	$mod_rel = str_replace($_SERVER['DOCUMENT_ROOT'],'',str_replace('\\', '/', $mod_path ));
-	$mod_name = basename($mod_path);
+    $mod_path = dirname(__FILE__);
+    $mod_rel = str_replace($_SERVER['DOCUMENT_ROOT'],'',str_replace('\\', '/', $mod_path ));
+    $mod_name = basename($mod_path);
 
-	$array = get_page_languages();
-	$langPageArray = array_merge($array,(get_pageCode_values( $pageId )));
+    $array = get_page_languages();
+    $array2= get_pageCode_values( $pageId );
+    $langPageArray = array_merge($array , $array2);
 
     foreach( $langPageArray as $key=>$value )
     {
         $langKey = $key;
-		if($array[$langKey]['visibility'] == 'hidden') {continue;}
-		$page_title = get_languages($langKey);
+        if($array[$langKey]['visibility'] == 'hidden') {continue;}
+        $page_title = get_languages($langKey);
         $langUrl = get_page_url( $value);
-		$class = strtoupper($langKey) == LANGUAGE ? 'class="current"' : ' class="default"';
+        $class = strtoupper($langKey) == LANGUAGE ? 'class="current"' : ' class="default"';
         $return_value [ $langKey ] = "\t\t".'<a '.$class.' href ="'. $langUrl .'" title="'.$page_title.'" >'.PHP_EOL;
         $return_value [ $langKey ] .= "\t\t\t".'<span>';
-		if ($ext=='TXT'){
-        	$return_value [ $langKey ] .=" $page_title " ;
-		} else if ($ext=='txt'){
-			$return_value [ $langKey ] .=" $langKey " ;
-		} else {
-			$return_value [ $langKey ] .= PHP_EOL."\t\t\t\t".'<img src="'.WB_URL.'/modules/'.$mod_name.'/flags/'.strtolower( $langKey ).'.'.$ext.'" alt="'.$page_title.'" title="'.$page_title.'" />'.PHP_EOL."\t\t\t";
-		}
+        if ($ext=='TXT'){
+            $return_value [ $langKey ] .=  " ".$array[$key]['page_title'].  " " ;
+        } else if ($ext=='txt'){
+            $return_value [ $langKey ] .=" $langKey " ;
+        } else {
+            $return_value [ $langKey ] .= PHP_EOL."\t\t\t\t".'<img src="'.WB_URL.'/modules/'.$mod_name.'/flags/'.strtolower( $langKey ).'.'.$ext.'" alt="'.$page_title.'" title="'.$page_title.'" />'.PHP_EOL."\t\t\t";
+        }
         $return_value [ $langKey ] .= '</span>'.PHP_EOL."\t\t".'</a>'.PHP_EOL;
     }
     return $return_value;
@@ -197,9 +198,9 @@ function get_page_languages()
 {
     global $database, $admin, $wb;
     $result=array();
-    $query  = 'SELECT `level`,`language`,`visibility`,`viewing_groups`,`viewing_users`,`page_id`,`page_code`,`link`,`parent` ';
-	$query .= 'FROM `'.TABLE_PREFIX.'pages` ';
-	$query .= 'WHERE `level` = \'0\' ';
+    $query  = 'SELECT `level`,`page_title`,`language`,`visibility`,`viewing_groups`,`viewing_users`,`page_id`,`page_code`,`link`,`parent` ';
+    $query .= 'FROM `'.TABLE_PREFIX.'pages` ';
+    $query .= 'WHERE `level` = \'0\' ';
     $query .=   'AND `menu_title` LIKE \'__\' ';
     // $query .=   'AND `visibility` = \'public\' ';
     $query .= 'GROUP BY `language` ';
@@ -214,8 +215,10 @@ function get_page_languages()
           $result[$value['language']]['page_code'] = $value['page_code'];
           $result[$value['language']]['language'] = $value['language'];
           $result[$value['language']]['visibility'] = $value['visibility'];
+          $result[$value['language']]['page_title'] = $value['page_title'];
         }
       }
+        
   return $result;
 }
 // set the absolute url with spezified page_id
@@ -231,8 +234,8 @@ function get_page_url( $value )
     {
         if ( $query_menu->numRows() > 0 )
         {
-        	 $page = $query_menu->fetchRow(MYSQL_ASSOC);
-        	 $return_value = page_link($page['link']);
+             $page = $query_menu->fetchRow(MYSQL_ASSOC);
+             $return_value = page_link($page['link']);
         }
     }
 
@@ -242,21 +245,21 @@ return $return_value;
 
 function get_page_list($parent, $this_page=0 )
 {
-	global $database, $entries;
+    global $database, $entries;
     $sql = 'SELECT `page_id`, `language`, `menu_title`, `page_code`, `parent` FROM `'.TABLE_PREFIX.'pages` WHERE `parent` = '.$parent.' ORDER BY `position`';
     $get_query = $database->query($sql);
-	if ( $get_query->numRows() )
+    if ( $get_query->numRows() )
     {
-		while($value = $get_query->fetchRow(MYSQL_ASSOC))
+        while($value = $get_query->fetchRow(MYSQL_ASSOC))
         {
-			if (( $value['page_id'] != $this_page ) )
+            if (( $value['page_id'] != $this_page ) )
             {
-				$entries [$value['page_id']]['language'] = $value['language'];
+                $entries [$value['page_id']]['language'] = $value['language'];
                 $entries [$value['page_id']]['menu_title'] = $value['menu_title'];
-				get_page_list($value['page_id'], $this_page );
-			}
+                get_page_list($value['page_id'], $this_page );
+            }
           }
-	}
+    }
    return $entries;
 }
 
@@ -269,31 +272,32 @@ function show_vars($array)
 }
 
 if(!function_exists('getBaseUrl')) {
-	function getBaseUrl()
-	{
-	global $mod_path;
+    function getBaseUrl()
+    {
+    global $mod_path;
 
-	// identify Server Document_Root
-	// on WIN/IIS create this entry
-	$script_name = str_replace('\\', '/',dirname(dirname(__FILE__)));
-	$sys_root = ( !isset($_SERVER['DOCUMENT_ROOT']) && $_SERVER['DOCUMENT_ROOT'] == '' ) ? (str_replace('\\', '/', $script_name)) : str_replace('\\', '/',$_SERVER['DOCUMENT_ROOT']);
+    // identify Server Document_Root
+    // on WIN/IIS create this entry
+    $script_name = str_replace('\\', '/',dirname(dirname(__FILE__)));
+    $sys_root = ( !isset($_SERVER['DOCUMENT_ROOT']) && $_SERVER['DOCUMENT_ROOT'] == '' ) ? (str_replace('\\', '/', $script_name)) : str_replace('\\', '/',$_SERVER['DOCUMENT_ROOT']);
 
-	   $_SERVER['DOCUMENT_ROOT'] = $sys_root;
+       $_SERVER['DOCUMENT_ROOT'] = $sys_root;
 
-	$wb_rel = str_replace( $sys_root, '' ,($script_name));
+    $wb_rel = str_replace( $sys_root, '' ,($script_name));
 
-	$mod_path = (!empty($mod_path)) ? $mod_path : '/' ;
-	$regex = '#(?=\\'.$mod_path.').*#i';
-	$replace = '';
-	$wb_rel = preg_replace ($regex, $replace, $wb_rel, -1 );
-	$wb_rel = str_replace('//', '/', $wb_rel );
-	if(!defined('WB_REL')) {define('WB_REL', $wb_rel);}
-	if(!defined('ADMIN_REL')) {define('ADMIN_REL', $wb_rel.'/admin');}
+    $mod_path = (!empty($mod_path)) ? $mod_path : '/' ;
+    $regex = '#(?=\\'.$mod_path.').*#i';
+    $replace = '';
+    $wb_rel = preg_replace ($regex, $replace, $wb_rel, -1 );
+    $wb_rel = str_replace('//', '/', $wb_rel );
+    if(!defined('WB_REL')) {define('WB_REL', $wb_rel);}
+    if(!defined('ADMIN_REL')) {define('ADMIN_REL', $wb_rel.'/admin');}
 
-	}
+    }
 
 getBaseUrl( );
 
 }
+
 
 

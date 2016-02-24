@@ -3,6 +3,11 @@
 if(count(get_included_files()) ==1){$z="HTTP/1.0 404 Not Found";header($z);die($z);}
 
 
+// this is by far the worst Hack i ever done
+// This complete idiotic piece of code needs $admin but is a frontend module !!!
+// Who ever programmed this piece of shit in first place must be completely braindead !!!
+// UNBELIEVABLE!!!!
+$admin=&$wb;
 
 
 function language_menu($ext='txt') {
@@ -33,5 +38,6 @@ function language_menu($ext='txt') {
 	print "\t".'</div>'.PHP_EOL;
     return true;
 }
+
 
 
