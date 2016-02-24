@@ -1,5 +1,5 @@
 Mod_Multilingual 
------------------
+==================
 
 Grundsätzlich wird bei WBCE  für mehrsprachige Seiten kein Mod_Multilingual benötigt. Einfach mehrsprachen Support in den Einstellungen aktivieren und folgende Verzeichnisstruktur anlegen.
 
@@ -85,5 +85,14 @@ müssen folgende Bedingungen erfüllt sein:
 3. Die Datei update_keys.php im Ordner /modules/mod_multilingual/ ist vorhanden.
    (Also das Modul ist installiert.)
 
-		
+
+Show Menu2
+-------------
+
+    show_menu2(0, SM2_ROOT+1, SM2_CURR+1);
+
+SM2_ROOT+1 sorgt dafür, das die oberste Ebene (DE, EN, PL....) Augeblendet wird.  
+
+
+ 	
 

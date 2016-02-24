@@ -1,5 +1,5 @@
 Multilingual 
------------------
+=================
 
 Basically WBCE does not need Multilingual for creating multilanguage pages. Just activate multilanguage support in settings and generate a directory structure like this.
 
@@ -79,4 +79,10 @@ To see the additional field in backend you need to match the folowing conditions
 3. The file "update_keys.php" whithin folder "/modules/mod_multilingual/" does exist.(Module is installed.)
 
 		
+Show Menu2
+-------------
 
+    show_menu2(0, SM2_ROOT+1, SM2_CURR+1);
+
+Use SM2_ROOT+1 to stop display of root level navigation (DE, EN, PL....) 
+Showmenu take care of the rest if multilanguage is enabled in Settings.    
