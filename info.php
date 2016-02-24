@@ -22,8 +22,8 @@ if(count(get_included_files()) ==1){$z="HTTP/1.0 404 Not Found";header($z);die($
 $module_directory = 'mod_multilingual';
 $module_name = 'Multilingual Switcher 1.6.7';
 $module_function = 'snippet';
-$module_version = '1.7.0';
-$module_status	= 'beta';
+$module_version = '1.7.1';
+$module_status	= 'alpha';
 $module_platform = '2.8.3';
 $module_author = 'LuiseHahne, Norbert Heimsath';
 $module_license = 'GNU General Public License 2';
