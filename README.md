@@ -86,3 +86,38 @@ Show Menu2
 
 Use SM2_ROOT+1 to stop display of root level navigation (DE, EN, PL....) 
 Showmenu take care of the rest if multilanguage is enabled in Settings.    
+
+
+New Function language_array()
+-------------------
+
+If you like to generate the menu Yourself , you got the option to optain all necessary data 
+whith this Function. 
+
+language_array() gibt folgendes zurück:
+array(2) {
+  ["EN"]=>
+  array(4) {
+    ["title"]=>
+    string(7) "English"
+    ["url"]=>
+    string(47) "http://wbce12x.norbath.de/pages/en.php"
+    ["active"]=>
+    bool(false)
+    ["image"]=>
+    string(69) "http://wbce12x.norbath.de/modules/mod_multilingual/flags/en."
+  }
+  ["DE"]=>
+  array(4) {
+    ["title"]=>
+    string(6) "German"
+    ["url"]=>
+    string(58) "http://wbce12x.norbath.de/pages/de/startseite.php"
+    ["active"]=>
+    bool(true)
+    ["image"]=>
+    string(69) "http://wbce12x.norbath.de/modules/mod_multilingual/flags/de."
+  }
+}
+ 
+

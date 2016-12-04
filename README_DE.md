@@ -94,5 +94,44 @@ Show Menu2
 SM2_ROOT+1 sorgt dafür, das die oberste Ebene (DE, EN, PL....) Augeblendet wird.  
 
 
+Neue Funktion language_array()
+------------------------------
+
+Wer gerne das Sprachmenu selber erzeugen möchte kann sich auch einfach einen Array zurückgeben lassen , der alle benötigten Daten enthält. 
+
+language_array() gibt folgendes zurück:
+
+````
+array(2) {
+  ["EN"]=>
+  array(4) {
+    ["title"]=>
+    string(7) "English"
+    ["url"]=>
+    string(47) "http://wbce12x.norbert-heimsath.de/pages/en.php"
+    ["active"]=>
+    bool(false)
+    ["image"]=>
+    string(69) "http://wbce12x.norbert-heimsath.de/modules/mod_multilingual/flags/en."
+  }
+  ["DE"]=>
+  array(4) {
+    ["title"]=>
+    string(6) "German"
+    ["url"]=>
+    string(58) "http://wbce12x.norbert-heimsath.de/pages/de/startseite.php"
+    ["active"]=>
+    bool(true)
+    ["image"]=>
+    string(69) "http://wbce12x.norbert-heimsath.de/modules/mod_multilingual/flags/de."
+  }
+}
+````
+
+
+
+
+
+
  	
 
