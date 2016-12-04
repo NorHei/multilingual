@@ -143,6 +143,32 @@ function set_language_icon ($pageId = 0, $ext='txt' )
     return $return_value;
 }
 
+function set_language_array ($pageId = 0)
+{
+    $return_value = array();
+    $mod_path = dirname(__FILE__);
+    $mod_rel = str_replace($_SERVER['DOCUMENT_ROOT'],'',str_replace('\\', '/', $mod_path ));
+    $mod_name = basename($mod_path);
+
+    $array = get_page_languages();
+    $array2= get_pageCode_values( $pageId );
+    $langPageArray = array_merge($array , $array2);
+
+    foreach( $langPageArray as $key=>$value )
+    {
+        $langKey = $key;
+        if($array[$langKey]['visibility'] == 'hidden') {
+            continue;
+        }
+        $return_value[$langKey]['title'] = get_languages($langKey);
+        $return_value[$langKey]['url'] = get_page_url($value);
+        $return_value[$langKey]['active'] = strtoupper($langKey) == LANGUAGE ? true : false;
+        $return_value[$langKey]['image'] = WB_URL.'/modules/'.$mod_name.'/flags/'.strtolower( $langKey ).'.';
+    }
+    
+    return $return_value;
+}
+
 function get_pageCode_values( $pageId = 0 )
 {
     global $database;
@@ -298,6 +324,7 @@ if(!function_exists('getBaseUrl')) {
 getBaseUrl( );
 
 }
+
 
 
 

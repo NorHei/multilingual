@@ -9,34 +9,40 @@ if(count(get_included_files()) ==1){$z="HTTP/1.0 404 Not Found";header($z);die($
 // UNBELIEVABLE!!!!
 $admin=&$wb;
 
-
 function language_menu($ext='txt') {
-    global $database;
-
-	if (!preg_match("/jpg|png|gif|txt|TXT/", $ext)) $ext='txt';
-
-	$mod_path = str_replace('\\', '/', dirname(__FILE__));
-	$mod_rel = str_replace($_SERVER['DOCUMENT_ROOT'],'',str_replace('\\', '/', $mod_path ));
-	$mod_name = basename($mod_path);
-
-	include('lang.functions.php');
-
     // Work-out we should check for existing page_code
-    $field_set = $database->field_exists(TABLE_PREFIX.'pages', 'page_code');
-    if (defined('PAGE_LANGUAGES') && (PAGE_LANGUAGES==true) && ($field_set==true)) {
-		include(get_module_language_file($mod_name));
-		$langIcons  = array();
-		echo '<div id="langmenu">'.PHP_EOL;
-		$langIcons = set_language_icon(PAGE_ID,$ext );
+    if (defined('PAGE_LANGUAGES') && (PAGE_LANGUAGES==true)) {
+        global $database;
+
+        if (!preg_match("/jpg|png|gif|txt|TXT/", $ext)) $ext='txt';
+        include_once __DIR__.'/lang.functions.php';
+        include_once(get_module_language_file(basename(dirname(__FILE__))));
+        $langIcons  = array();
+        echo '<div id="langmenu">'.PHP_EOL;
+        $langIcons = set_language_icon(PAGE_ID, $ext);
 
         if( sizeof($langIcons) > 1 ) {
-			foreach( $langIcons as $key=>$value ) {
-				print $value;
-			}
-		}
-	}
-	print "\t".'</div>'.PHP_EOL;
+            foreach( $langIcons as $key=>$value ) {
+                print $value;
+            }
+        }
+        print "\t".'</div>'.PHP_EOL;
+    }
     return true;
+}
+
+function language_array() {
+    
+    // Work-out we should check for existing page_code
+    if (defined('PAGE_LANGUAGES') && (PAGE_LANGUAGES==true)) {
+        global $database;
+        include_once __DIR__.'/lang.functions.php';
+        include_once(get_module_language_file(basename(dirname(__FILE__))));
+        
+        $aList = set_language_array(PAGE_ID);
+    }
+    
+    return $aList;
 }
 
 
