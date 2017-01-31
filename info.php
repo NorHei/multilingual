@@ -20,7 +20,7 @@ if(count(get_included_files()) ==1){$z="HTTP/1.0 404 Not Found";header($z);die($
 
 
 $module_directory = 'mod_multilingual';
-$module_name = 'Multilingual Switcher 1.8.0';
+$module_name = 'Multilingual Switcher 1.9.0';
 $module_function = 'snippet';
 $module_version = '1.8.0';
 $module_status	= 'alpha';

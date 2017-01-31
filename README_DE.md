@@ -128,7 +128,20 @@ array(2) {
 }
 ````
 
+Neue Funktion language_hreflang()
+-------------------
 
+https://support.google.com/webmasters/answer/189077?hl=de
+
+Einfach nur 
+
+````
+if (function_exists("language_hreflang")) language_hreflang();
+````
+Im Template eintragen um eine komplette Liste zu bekommen.  
+
+Weitere Informationen zu den Parametern der funktion finden sie in der include.php in der Quelltext Doku zu dieser Funktion
+  
 
 
 

@@ -120,4 +120,18 @@ array(2) {
   }
 }
  
+New Function language_hreflang()
+-------------------
+
+https://support.google.com/webmasters/answer/189077?hl=en
+
+just use
+
+~~~~~~~~~~~~~
+if (function_exists("language_hreflang")) language_hreflang();
+~~~~~~~~~~~~~
+in your Template to get a ful scale Link list. 
+
+See the documentation in include.php for detailed Parameter list.   
+
 
