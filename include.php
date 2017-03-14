@@ -56,17 +56,18 @@ function language_array() {
 */
 function language_hreflang ($output=true, $show_recent=true, $show_x_default=true){
     // Used for prefered Render type HTML5 or XHTML ... 
-    $end_tag=" /";  
-    if (defined('WB_RENDER')) $Render=WB_RENDER;
-    if ($this->Render!="xhtml") $end_tag=" ";
+    $end_tag=" /";
+
+    if (defined('WB_RENDER') AND WB_RENDER !="xhtml" )
+        $end_tag=" ";
 
     // output var
     $out="\n";
-    
+
     if ($show_x_default==true) {
         $out.="\t\t".'<link rel="alternate" hreflang="x-default" href="'.WB_URL.'" '.$end_tag.'>'.PHP_EOL;
     }
-    
+
     // Lets walk the language array 
     $aLangLinks = language_array();
 	foreach($aLangLinks as $key=>$link){
